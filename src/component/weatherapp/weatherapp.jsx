@@ -7,13 +7,13 @@ import {Container,
         CurrentWeather,
         Temperature,
         Fahrenheit,
-        AirFlow,
-        Rain,
+        Wind,
+        Precipitation,
         Redo
     } from './weatherapp.styles';  
 import { ReactComponent as MostlyCloudyIcon } from '../../images/mostly_cloudy.svg';
-import { ReactComponent as AirFlowIcon } from '../../images/airflow.svg';
-import { ReactComponent as RainIcon } from '../../images/rain.svg';
+import { ReactComponent as WindIcon } from '../../images/wind.svg';
+import { ReactComponent as PrecipitationIcon } from '../../images/precipitation.svg';
 
 
 const WeatherApp = () => {
@@ -30,14 +30,14 @@ const WeatherApp = () => {
                     </Temperature>
                     <MostlyCloudyIcon />
                 </CurrentWeather>
-                <AirFlow>
-                    <AirFlowIcon />
-                    24 m/h
-                </AirFlow>
-                <Rain>
-                    <RainIcon/>
-                    Rain
-                </Rain>
+                <Wind>
+                    <WindIcon />
+                    11 km/h
+                </Wind>
+                <Precipitation>
+                    <PrecipitationIcon/>
+                    0 %
+                </Precipitation>
                 <Redo/>
             </Weather_card>
         </Container>

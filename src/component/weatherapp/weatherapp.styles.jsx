@@ -55,7 +55,7 @@ export const Fahrenheit = styled.div`
   font-size: 42px;
 `;
 
-export const AirFlow = styled.div`
+export const Wind = styled.div`
   display: flex;
   align-items: center;
   font-size: 16x;
@@ -70,7 +70,7 @@ export const AirFlow = styled.div`
   }
 `;
 
-export const Rain = styled.div`
+export const Precipitation = styled.div`
   display: flex;
   align-items: center;
   font-size: 16x;
