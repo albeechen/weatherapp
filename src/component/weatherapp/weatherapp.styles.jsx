@@ -10,17 +10,18 @@ export const Container = styled.div`
 `;
   
 export const Weather_card = styled.div`  
+    ${props => console.log(props.dark)}
     position: relative;
     min-width: 360px;
     box-shadow: 0 1px 3px 0 #999999;
-    background-color: #f9f9f9;
+    background-color: ${props => props.dark === true ? '#404040' : '#f9f9f9'};
     box-sizing: border-box;
     padding: 30px 15px;
 `;
 
 export const Location = styled.div`
     font-size: 28px;
-    color: #212121;
+    color: ${props => props.dark === true ? 'white' : '#212121'};
     margin-bottom: 20px;
 `;
 
@@ -70,7 +71,7 @@ export const Wind = styled.div`
   }
 `;
 
-export const Precipitation = styled.div`
+export const Humidity = styled.div`
   display: flex;
   align-items: center;
   font-size: 16x;
