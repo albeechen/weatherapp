@@ -9,8 +9,7 @@ export const Container = styled.div`
     justify-content: center;
 `;
   
-export const Weather_card = styled.div`  
-    ${props => console.log(props.dark)}
+export const WeatherCard = styled.div`  
     position: relative;
     min-width: 360px;
     box-shadow: 0 1px 3px 0 #999999;

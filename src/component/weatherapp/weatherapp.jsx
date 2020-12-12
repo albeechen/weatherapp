@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect, useCallback} from 'react';
 
 import {Container, 
-        Weather_card,
+        WeatherCard,
         Location,
         Description,
         CurrentWeather,
@@ -18,65 +18,93 @@ import { ReactComponent as NightIcon } from '../../images/night-clear.svg';
 
 
 const WeatherApp = () => {
-    const tmp = new Date().toLocaleString();
+    const tmp = new Date();
     const date = new Intl.DateTimeFormat('ENG', {
         hour: 'numeric',
         minute: 'numeric',
-      }).format(new Date(tmp));
+      }).format(new Date(tmp.toLocaleString()));
     
-    const dark = true;
-    const [currentWeather, setCurrentWeather] = useState({
+    const [weatherElement, setweatherElement] = useState({
         observationTime: date,
         locationName: 'Aliso Viejo',
         description: 'Partly Cloudy',
         temperature: 300,
         windSpeed: 0.58,
         humidity: 41,
+        isDark: false,
     });
 
-    const handleClick = () => {
+   /* const fetchData = useCallback( () => {
+        
+        const fetchingData = async () => {
+            const [currentWeather] = await Promise.all([
+                fetchCurrentWeather()
+            ]);
+
+            setweatherElement({
+                ...currentWeather
+            });
+        };
+        
+        fetchingData()
+    }, []);
+    */
+    
+    useEffect(() => {
+        fetchCurrentWeather();
+    }, []);
+    
+    /*const handleClick = () => {
+        fetchCurrentWeather();
+    };*/
+
+    const fetchCurrentWeather = () => {
         fetch(
-            'https://api.openweathermap.org/data/2.5/weather?q=' + currentWeather.locationName + '&appid=b3c57bf57483ed4ea200cbd71656d534'
+            'https://api.openweathermap.org/data/2.5/weather?q=' + weatherElement.locationName + '&appid=b3c57bf57483ed4ea200cbd71656d534'
         )
         .then((response)=> response.json())
         .then((data) => {
-            setCurrentWeather({
+            //console.log(data);
+            setweatherElement({
                 observationTime: date,
                 locationName: data.name,
                 description: data.weather[0].description,
                 temperature: data.main.temp,
                 windSpeed: data.wind.speed,
                 humidity: data.main.humidity,
+                isDark: Date.parse(tmp)/1000>data.sys.sunset || Date.parse(tmp)/1000<data.sys.sunrise? true:false
             })
         })
     };
 
+    
+
     return (
         <Container>
-            <Weather_card dark={dark}>
-                <Location dark={dark}>{currentWeather.locationName}</Location>
+            <WeatherCard dark={weatherElement.isDark}>
+                <Location dark={weatherElement.isDark}>{weatherElement.locationName}</Location>
                 <Description>
-                    {currentWeather.observationTime}
+                    as of {weatherElement.observationTime}
                     {' '}
-                    {currentWeather.description}
+                    {weatherElement.description}
                 </Description>
                 <CurrentWeather>
                     <Temperature>
-                    {Math.round(currentWeather.temperature*(9/5)-459.67)}
+                    {Math.round(weatherElement.temperature*(9/5)-459.67)}
                     <Fahrenheit>°F</Fahrenheit>
                     </Temperature>
-                    {{dark} ? <NightIcon/> : <MostlyCloudyIcon/>}
+                    {weatherElement.isDark ? <NightIcon/> : <MostlyCloudyIcon/>}
                 </CurrentWeather>
                 <Wind>
                     <WindIcon />
-                    {Math.round(currentWeather.windSpeed/0.44704)} mph
+                    {Math.round(weatherElement.windSpeed/0.44704)} mph
                 </Wind>
                 <Humidity>
                     <HumidityIcon/>
-                    {currentWeather.humidity} %
+                    {weatherElement.humidity} %
                 </Humidity>
-                <Redo onClick={handleClick}/>
-            </Weather_card>
+                <Redo onClick={fetchCurrentWeather}/>
+            </WeatherCard>
         </Container>
     );
 };
