@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback} from 'react';
-
+import WeatherIcon from './weatherIcon';
 import {Container, 
         WeatherCard,
         Location,
@@ -13,8 +13,7 @@ import {Container,
     } from './weatherapp.styles';  
 import { ReactComponent as WindIcon } from '../../images/wind.svg';
 import { ReactComponent as HumidityIcon } from '../../images/humidity.svg';
-import { ReactComponent as MostlyCloudyIcon } from '../../images/mostly_cloudy.svg';
-import { ReactComponent as NightIcon } from '../../images/night-clear.svg';
+
 
 
 const WeatherApp = () => {
@@ -64,10 +63,11 @@ const WeatherApp = () => {
         )
         .then((response)=> response.json())
         .then((data) => {
-            //console.log(data);
+            console.log(data);
             setweatherElement({
                 observationTime: date,
                 locationName: data.name,
+                weatherIcon: data.weather[0].icon,
                 description: data.weather[0].description,
                 temperature: data.main.temp,
                 windSpeed: data.wind.speed,
@@ -93,7 +93,7 @@ const WeatherApp = () => {
                     {Math.round(weatherElement.temperature*(9/5)-459.67)}
                     <Fahrenheit>°F</Fahrenheit>
                     </Temperature>
-                    {weatherElement.isDark ? <NightIcon/> : <MostlyCloudyIcon/>}
+                    <WeatherIcon icon={weatherElement.weatherIcon}/>
                 </CurrentWeather>
                 <Wind>
                     <WindIcon />

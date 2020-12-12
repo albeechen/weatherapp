@@ -13,7 +13,7 @@ export const WeatherCard = styled.div`
     position: relative;
     min-width: 360px;
     box-shadow: 0 1px 3px 0 #999999;
-    background-color: ${props => props.dark === true ? '#404040' : '#f9f9f9'};
+    background-color: ${props => props.dark === true ? 'black' : '#f9f9f9'};
     box-sizing: border-box;
     padding: 30px 15px;
 `;
@@ -36,7 +36,7 @@ export const CurrentWeather = styled.div`
     align-items: center;
     margin-bottom: 30px;
 
-    svg {
+    img {
         flex-basis: 30%;
         height: auto;
         margin-right: 30px;
