@@ -14,4 +14,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### Skill 
 1.CSS in JS - emotion\
-2.Reach hook
+2.Reach hook: useState/useEffect/useCallback\
+3.JavaScript: Promise and async
