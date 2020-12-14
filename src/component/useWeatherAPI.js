@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import Appid from './appkey';
+import Appid from './appkey';//hide app key id, please request from openweather 
 
 function fetchCurrentWeather (location) {
     const tmp = new Date();
