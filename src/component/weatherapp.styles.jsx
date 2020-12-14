@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ReactComponent as RedoIcon } from '../../images/redo.svg';
+import { ReactComponent as RedoIcon } from '../images/redo.svg';
 
 export const Container = styled.div`
     background-color: #ededed;
@@ -28,6 +28,7 @@ export const Description = styled.div`
     font-size: 16px;
     color: #828282;
     margin-bottom: 30px;
+    text-transform: capitalize;
 `;
 
 export const CurrentWeather = styled.div`
@@ -83,11 +84,22 @@ export const Humidity = styled.div`
   }
 `;
 
-export const Redo = styled(RedoIcon)`
+export const Refresh = styled(RedoIcon)`
   width: 15px;
   height: 15px;
   position: absolute;
   right: 15px;
   bottom: 15px;
   cursor: pointer;
+  animation: rotate infinite 1.5s linear;
+  animation-duration: ${props => props.isLoading ? '1.5s' : '0s'};
+  
+  @keyframes rotate {
+    from {
+      transform: rotate(360deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
 `;
